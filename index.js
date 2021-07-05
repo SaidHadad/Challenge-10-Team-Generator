@@ -4,6 +4,8 @@ const Engineer = require('./lib/Engineer');
 const Intern = require('./lib/Intern');
 const generateHTML = require('./src/page-template');
 const { writeFile, copyFile } = require('./generate-site');
+const { default: generate } = require('@babel/generator');
+var team = [];
 
 class teamBuilder {
   constructor() {
@@ -11,15 +13,14 @@ class teamBuilder {
     this.engineer;
     this.intern;
   };
+
   generateManager() {
-    var team = [];
     console.log(`
 ================================
     Welome to Team Generator    
 ================================
     `)
-    inquirer
-      .prompt([
+    inquirer.prompt([
         { 
           type: 'input',
           name: 'name',
@@ -72,9 +73,151 @@ class teamBuilder {
         let role = 'Manager'
         this.manager = new Manager(name,email,role,office);
         team.push(this.manager);
-        console.log(this.manager);
-      })
+        this.buildteam();
+      });
   };
-}
+
+  buildteam(){
+    console.log(`
+==============================
+    Lets create your team             
+==============================
+    `)
+    inquirer.prompt([
+      {
+        type: 'list',
+        name: 'buildList',
+        message: "Select what would you like to do:",
+        choices: ["Add an Engineer", "Add an Intern", "Finish the process"]
+      }
+    ])
+    .then(({buildList}) => {
+      if(buildList == 'Add an Engineer') {
+        this.generateEngineer();
+      }
+      else if (buildList == "Add an Intern") {
+        this.generateIntern();
+      }
+      else if (buildList == "Finish the process") {
+        // writeFile(generateHTML(team));
+        // copyFile();
+        console.log(team);
+        console.log(Engineer);
+      }
+    });
+  };
+  
+  generateEngineer() {
+    console.log(`
+================================
+  Add an Engineer to the Team
+================================
+    `)
+    inquirer.prompt([
+        { 
+          type: 'input',
+          name: 'name',
+          message: "What is the Engineer's Name? (REQUIRED)",
+          validate: nameInput => {
+            if(nameInput) {
+              return true;
+            } else {
+              console.log("Please enter a name!"); 
+              return false;
+            }
+          }
+        },
+        {          
+          type: 'input',
+          name: 'email',
+          message: "What is the Engineer's email? (REQUIRED)",
+          validate: emailInput => {
+            if(emailInput) {
+                return true;
+            } else {
+                console.log("Please enter an email!"); 
+                return false;
+            }
+          }
+        },
+        {
+          type: 'input',
+          name: 'gitHub',
+          message: "What is the Engineer's GitHub? (REQUIRED)",
+          validate: gitHubInput => {
+            if (gitHubInput){
+                return true;
+              }
+            else {
+              console.log("Please enter a GitHub Username");
+              return false;
+            }
+          }
+        }
+      ])
+      .then(({name,email,gitHub}) => {
+        let role = 'Engineer'
+        this.engineer = new Engineer(name,email,role,gitHub);
+        team.push(this.engineer);
+        this.buildteam();
+      });
+  };
+
+  generateIntern() {
+    console.log(`
+================================
+    Add an Intern to the Team
+================================
+    `)
+    inquirer.prompt([
+        { 
+          type: 'input',
+          name: 'name',
+          message: "What is the Intern's Name? (REQUIRED)",
+          validate: nameInput => {
+            if(nameInput) {
+              return true;
+            } else {
+              console.log("Please enter a name!"); 
+              return false;
+            }
+          }
+        },
+        {          
+          type: 'input',
+          name: 'email',
+          message: "What is the Intern's email? (REQUIRED)",
+          validate: emailInput => {
+            if(emailInput) {
+                return true;
+            } else {
+                console.log("Please enter an email!"); 
+                return false;
+            }
+          }
+        },
+        {
+          type: 'input',
+          name: 'school',
+          message: "What is the Intern's School? (REQUIRED)",
+          validate: schoolInput => {
+            if (schoolInput){
+                return true;
+              }
+            else {
+              console.log("Please enter a School");
+              return false;
+            }
+          }
+        }
+      ])
+      .then(({name,email,school}) => {
+        let role = 'Intern'
+        this.intern = new Intern(name,email,role,school);
+        team.push(this.intern);
+        this.buildteam();
+      });
+  };
+} 
 
 new teamBuilder().generateManager();
