@@ -1,12 +1,15 @@
+// function to populate the managerCard with the info from team array
 managerCard = team => {
+  // create a local empty variable that will store the info for each card
   var cards = '';
   team.forEach(position => {
+    // validates the roll from wich we are creating the card and takes the info
     if (position.role === "Manager") {
       cards = cards + `
-      <div class="card shadow" style="max-width: 18rem">
+      <div class="card shadow m-3 cards">
         <div class="card-header bg-primary text-white font-weight-bold">
           <h4>${position.name}</h4>
-          <h5>${position.role}</h5>
+          <h5><i class="fas fa-mug-hot"></i> ${position.role}</h5>
         </div>
         <div class="card-body bg-light">
           <ul class="list-group list-group-flush border my-3">
@@ -27,23 +30,46 @@ engineerCard = team => {
   team.forEach(position => {
     if (position.role === "Engineer") {
       cards = cards + `
-      <div class="card shadow" style="max-width: 18rem">
+      <div class="card shadow m-3 cards">
         <div class="card-header bg-primary text-white font-weight-bold">
           <h4>${position.name}</h4>
-          <h5>${position.role}</h5>
+          <h5><i class="fas fa-glasses"></i> ${position.role}</h5>
         </div>
         <div class="card-body bg-light">
           <ul class="list-group list-group-flush border my-3">
             <li class="list-group-item">ID: ${position.id}</li>
             <li class="list-group-item">Email: <a href="mailto:${position.email}" class="card-link">${position.email}</a></li>
-            <li class="list-group-item">GitHub: <a href="https://github.com/${position.gitHub}" class="card-link">${position.gitHub}</a></li>
+            <li class="list-group-item">GitHub: <a href="https://github.com/${position.gitHub}" class="card-link" target="_blank">${position.gitHub}</a></li>
           </ul>
         </div>
       </div>
       `;
     }
   });
-  console.log(cards);
+  return cards;
+};
+
+internCard = team => {
+  var cards = '';
+  team.forEach(position => {
+    if (position.role === "Intern") {
+      cards = cards + `
+      <div class="card shadow m-3 cards">
+        <div class="card-header bg-primary text-white font-weight-bold">
+          <h4>${position.name}</h4>
+          <h5><i class="fas fa-user-graduate"></i> ${position.role}</h5>
+        </div>
+        <div class="card-body bg-light">
+          <ul class="list-group list-group-flush border my-3">
+            <li class="list-group-item">ID: ${position.id}</li>
+            <li class="list-group-item">Email: <a href="mailto:${position.email}" class="card-link" >${position.email}</a></li>
+            <li class="list-group-item">School: ${position.school}</li>
+          </ul>
+        </div>
+      </div>
+      `;
+    }
+  });
   return cards;
 };
 
@@ -56,17 +82,19 @@ generatePage = team => {
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Team Generator</title>
+  <script src="https://kit.fontawesome.com/515cd316f8.js" crossorigin="anonymous"></script>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   <link rel="stylesheet" href="style.css">
   </head>
   <body>
-    <header style = "height: 10vh;" class = "d-flex align-items-center bg-danger justify-content-center">
+    <header style = "height: 10vh;" class = "d-flex align-items-center bg-danger justify-content-center mb-5">
       <h1 class ="text-light"> My Team </h1>
     </header>
     <main>
-    <div class="card-deck">
+    <div class="justify-content-center align-items-center row card-container">
       ${managerCard(team)}
       ${engineerCard(team)}
+      ${internCard(team)}
     </div>
     <main>
   </body>

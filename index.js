@@ -1,11 +1,16 @@
+// declare the variables to use the required modules and functions, such as inquirer, write/copy file
+// our objects manager, engineer and intern. And the template for the html generatePage
 const inquirer = require('inquirer');
 const Manager = require('./lib/Manager');
 const Engineer = require('./lib/Engineer');
 const Intern = require('./lib/Intern');
 const generatePage = require('./src/page-template');
 const { writeFile, copyFile } = require('./utils/generate-site');
+
+// declare a global array to store the user input
 var team = [];
 
+// declare a class that is calling our 3 objects manager, engineer and intern
 class teamBuilder {
   constructor() {
     this.manager;
@@ -13,6 +18,39 @@ class teamBuilder {
     this.intern;
   };
 
+  // This function just asks the user if they'd like to add an engineer an intern or finish creating the team
+  buildteam(){
+    console.log(`
+  ==============================
+    Lets create your team             
+  ==============================
+    `)
+    inquirer.prompt([
+      {
+        type: 'list',
+        name: 'buildList',
+        message: "Select what would you like to do:",
+        choices: ["Add an Engineer", "Add an Intern", "Finish the process"]
+      }
+    ])
+    // 3 ifs for each case
+    .then(({buildList}) => {
+      if(buildList == 'Add an Engineer') {
+        this.generateEngineer();
+      }
+      else if (buildList == "Add an Intern") {
+        this.generateIntern();
+      }
+      else if (buildList == "Finish the process") {
+        // pushes the team array into the generatePage function so we can use the values on the template
+        writeFile(generatePage(team));
+        copyFile();
+        console.log('file created');       
+      }
+    });
+  };
+
+  // first function of teamBuilder is to get the manager input
   generateManager() {
     console.log(`
 ================================
@@ -52,6 +90,7 @@ class teamBuilder {
           message: "What is the Manager's office number? (REQUIRED)",
           validate: officeInput => {
             if (officeInput){
+              // validate it's a number on the office field
               let a = isNaN(officeInput);
               if(!a) {
                 return true;
@@ -68,43 +107,17 @@ class teamBuilder {
           }
         }
       ])
+      // takes the name, email, and office inputs and pushes them onto a new Manager object
       .then(({name,email,office}) => {
         let role = 'Manager'
         this.manager = new Manager(name,email,role,office);
         team.push(this.manager);
+        // after getting the manager info calls for a function to build the rest of the team
         this.buildteam();
       });
   };
 
-  buildteam(){
-    console.log(`
-==============================
-    Lets create your team             
-==============================
-    `)
-    inquirer.prompt([
-      {
-        type: 'list',
-        name: 'buildList',
-        message: "Select what would you like to do:",
-        choices: ["Add an Engineer", "Add an Intern", "Finish the process"]
-      }
-    ])
-    .then(({buildList}) => {
-      if(buildList == 'Add an Engineer') {
-        this.generateEngineer();
-      }
-      else if (buildList == "Add an Intern") {
-        this.generateIntern();
-      }
-      else if (buildList == "Finish the process") {
-        console.log(team);
-        writeFile(generatePage(team));
-        // copyFile();
-      }
-    });
-  };
-  
+  // function of teamBuilder to get the engineer input
   generateEngineer() {
     console.log(`
 ================================
@@ -153,14 +166,17 @@ class teamBuilder {
           }
         }
       ])
+      // creates a new Engineer object and pushes our input into the array, updates the array team with the engineer info
       .then(({name,email,gitHub}) => {
         let role = 'Engineer'
         this.engineer = new Engineer(name,email,role,gitHub);
         team.push(this.engineer);
+        // calls for the build team function so the user gets to chose what to do next
         this.buildteam();
       });
   };
 
+  // function of teamBuilder to get the intern input
   generateIntern() {
     console.log(`
 ================================
@@ -209,6 +225,7 @@ class teamBuilder {
           }
         }
       ])
+      // creates a new Intern object and pushes our input into the array, updates the array team with the Intern info
       .then(({name,email,school}) => {
         let role = 'Intern'
         this.intern = new Intern(name,email,role,school);
@@ -218,4 +235,5 @@ class teamBuilder {
   };
 } 
 
+// calls for a new teamBuilder object and starts it's first function generate a Manager
 new teamBuilder().generateManager();
