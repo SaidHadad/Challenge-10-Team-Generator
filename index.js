@@ -2,9 +2,8 @@ const inquirer = require('inquirer');
 const Manager = require('./lib/Manager');
 const Engineer = require('./lib/Engineer');
 const Intern = require('./lib/Intern');
-const generateHTML = require('./src/page-template');
-const { writeFile, copyFile } = require('./generate-site');
-const { default: generate } = require('@babel/generator');
+const generatePage = require('./src/page-template');
+const { writeFile, copyFile } = require('./utils/generate-site');
 var team = [];
 
 class teamBuilder {
@@ -99,10 +98,8 @@ class teamBuilder {
         this.generateIntern();
       }
       else if (buildList == "Finish the process") {
-        // writeFile(generateHTML(team));
+        writeFile(generatePage(team));
         // copyFile();
-        console.log(team);
-        console.log(Engineer);
       }
     });
   };
