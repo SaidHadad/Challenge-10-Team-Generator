@@ -98,6 +98,7 @@ class teamBuilder {
         this.generateIntern();
       }
       else if (buildList == "Finish the process") {
+        console.log(team);
         writeFile(generatePage(team));
         // copyFile();
       }

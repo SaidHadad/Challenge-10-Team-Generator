@@ -1,4 +1,53 @@
-generatePage = () => {
+managerCard = team => {
+  var cards = '';
+  team.forEach(position => {
+    if (position.role === "Manager") {
+      cards = cards + `
+      <div class="card shadow" style="max-width: 18rem">
+        <div class="card-header bg-primary text-white font-weight-bold">
+          <h4>${position.name}</h4>
+          <h5>${position.role}</h5>
+        </div>
+        <div class="card-body bg-light">
+          <ul class="list-group list-group-flush border my-3">
+            <li class="list-group-item">ID: ${position.id}</li>
+            <li class="list-group-item">Email: <a href="mailto:${position.email}" class="card-link">${position.email}</a></li>
+            <li class="list-group-item">Office: ${position.office}</li>
+          </ul>
+        </div>
+      </div>
+      `;
+    } 
+  });
+  return cards;
+};
+
+engineerCard = team => {
+  var cards = '';
+  team.forEach(position => {
+    if (position.role === "Engineer") {
+      cards = cards + `
+      <div class="card shadow" style="max-width: 18rem">
+        <div class="card-header bg-primary text-white font-weight-bold">
+          <h4>${position.name}</h4>
+          <h5>${position.role}</h5>
+        </div>
+        <div class="card-body bg-light">
+          <ul class="list-group list-group-flush border my-3">
+            <li class="list-group-item">ID: ${position.id}</li>
+            <li class="list-group-item">Email: <a href="mailto:${position.email}" class="card-link">${position.email}</a></li>
+            <li class="list-group-item">GitHub: <a href="https://github.com/${position.gitHub}" class="card-link">${position.gitHub}</a></li>
+          </ul>
+        </div>
+      </div>
+      `;
+    }
+  });
+  console.log(cards);
+  return cards;
+};
+
+generatePage = team => {
   return `
   <!DOCTYPE html>
   <html lang="en">
@@ -11,7 +60,15 @@ generatePage = () => {
   <link rel="stylesheet" href="style.css">
   </head>
   <body>
-  <h1>Hello World>
+    <header style = "height: 10vh;" class = "d-flex align-items-center bg-danger justify-content-center">
+      <h1 class ="text-light"> My Team </h1>
+    </header>
+    <main>
+    <div class="card-deck">
+      ${managerCard(team)}
+      ${engineerCard(team)}
+    </div>
+    <main>
   </body>
   <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
