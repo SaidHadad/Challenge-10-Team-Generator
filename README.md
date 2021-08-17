@@ -1,11 +1,14 @@
   <!-- PROJECT TITE -->
-  <h1 align="center">Team Generator</h1>
+  <h1 align="center">Note Taker</h1>
   
   <!-- DESCRIPTION -->
   <p align="center">
-  a Node.js command-line application that takes in information about employees on a software engineering team and generates an HTML webpage that displays summaries for each person. <br>
-  Video Link: https://drive.google.com/file/d/1Qgp560LSrcFBCIJFJh09F2ooMsqp8zSu/view
-  </p>
+  Application called Note Taker that can be used to write and save notes. This application uses an Express.js back end and saves and retrieves note data from a JSON file.
+
+  <!-- DEPLOYED LINK -->
+  Heroku: https://vert-fromage-04848.herokuapp.com/notes
+  GitHub repository URL: https://github.com/SaidHadad/Challenge-11-Note-Taker
+
   <!-- TABLE OF CONTENTS -->
   <details open="open">
   <summary>Table of Contents</summary>
@@ -29,12 +32,12 @@
   <!-- ABOUT THE PROJECT -->
   ## About The Project
 
-  ![TimeTable](./dist/Capture.JPG) <br>
-  10th Challenge for the University of Toronto Coding Bootcamp
+  ![NoteTaker](./public/assets/Capture.JPG) <br>
+  11th Challenge for the University of Toronto Coding Bootcamp
   
   ## Built With
 
-   JavaScript, E6S, Node, Bootstrap, OOP and TDD
+   JavaScript, E6S, Node, Express
   
   <!-- GETTING STARTED -->
   
@@ -42,11 +45,17 @@
 
   ### Prerequisites
 
-  Node, node_modules, Image, terminal, Jest for the test
+  Node, node_modules, express.js
 
   ### Installation
 
-  On your terminal navigate to the Team Generator folder and run node index.js
+  npm install --y <br>
+  npm install express <br>
+  <br>
+  In package.json add<br> 
+  "start": "node server.js" to scripts<br>
+  <br>
+  start the server
 
   <!-- CONTRIBUTING -->
     
