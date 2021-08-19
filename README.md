@@ -31,7 +31,7 @@
   <!-- ABOUT THE PROJECT -->
   ## About The Project
 
-  ![Team Generator](./dist/Capture.jpg) <br>
+  ![Team Generator](./dist/Capture.JPG) <br>
   10th Challenge for the University of Toronto Coding Bootcamp
   
   ## Built With
