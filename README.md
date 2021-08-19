@@ -4,7 +4,9 @@
   <!-- DESCRIPTION -->
   <p align="center">
   Node.js command-line application that takes in information about employees on a software engineering team and generates an HTML webpage that displays summaries for each person. 
+  
   <!-- DEPLOYED LINK -->
+  <p align="left">
   Video: https://drive.google.com/file/d/1Qgp560LSrcFBCIJFJh09F2ooMsqp8zSu/view <br>
   GitHub repository URL: https://github.com/SaidHadad/Team-Generator
 
