@@ -1,13 +1,12 @@
   <!-- PROJECT TITE -->
-  <h1 align="center">Note Taker</h1>
+  <h1 align="center">Team Generator</h1>
   
   <!-- DESCRIPTION -->
   <p align="center">
-  Application called Note Taker that can be used to write and save notes. This application uses an Express.js back end and saves and retrieves note data from a JSON file.
-
+  Node.js command-line application that takes in information about employees on a software engineering team and generates an HTML webpage that displays summaries for each person. 
   <!-- DEPLOYED LINK -->
-  Heroku: https://vert-fromage-04848.herokuapp.com/notes
-  GitHub repository URL: https://github.com/SaidHadad/Challenge-11-Note-Taker
+  Video: https://drive.google.com/file/d/1Qgp560LSrcFBCIJFJh09F2ooMsqp8zSu/view
+  GitHub repository URL: https://github.com/SaidHadad/Team-Generator
 
   <!-- TABLE OF CONTENTS -->
   <details open="open">
@@ -32,12 +31,15 @@
   <!-- ABOUT THE PROJECT -->
   ## About The Project
 
-  ![NoteTaker](./public/assets/Capture.JPG) <br>
-  11th Challenge for the University of Toronto Coding Bootcamp
+  ![Team Generator](./dist/Capture.jpg) <br>
+  10th Challenge for the University of Toronto Coding Bootcamp
   
   ## Built With
 
-   JavaScript, E6S, Node, Express
+  * JavaScript
+  * JQuery
+  * MySQL
+  * Node.js
   
   <!-- GETTING STARTED -->
   
@@ -63,7 +65,9 @@
   
   ## License
 
-  MIT
+  [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
+  [MIT License](https://choosealicense.com/licenses/mit/)  
   
   <!-- CONTACT -->
   
